@@ -11,6 +11,8 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 
 	@Override
 	public V get(K key) {
+		if(key== null)
+			throw new RuntimeException();
 		int hash=Math.abs(key.hashCode())%size;
 		for(int i=0;i<array[hash].size();i++) {
 			if(Math.abs(key.hashCode())==Math.abs(array[hash].getKey(i).hashCode())) {
@@ -23,6 +25,8 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 
 	@Override
 	public V set(K key, V value) {
+		if(key == null || value == null)
+			throw new RuntimeException();
 		int hash=Math.abs(key.hashCode())%size;
 		if(array[hash] == null) {
 			array[hash]=new LinkedList();
@@ -44,6 +48,8 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 
 	@Override
 	public V remove(K key) {
+		if(key== null)
+			throw new RuntimeException();
 		int hash=Math.abs(key.hashCode())%size;
 		
 		for(int i=0;i<array[hash].size();i++) {

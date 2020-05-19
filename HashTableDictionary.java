@@ -14,10 +14,14 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 		if(key== null)
 			throw new RuntimeException();
 		int hash=Math.abs(key.hashCode())%size;
-		for(int i=0;i<array[hash].size();i++) {
-			if(Math.abs(key.hashCode())==Math.abs(array[hash].getKey(i).hashCode())) {
-				V temp =(V)(array[hash].get(i));
-				return temp;
+		if(array[hash]==null)
+			return null;
+		else {
+			for(int i=0;i<array[hash].size();i++) {
+				if(key.equals((K)(array[hash].getKey(i)))) {
+					V temp =(V)(array[hash].get(i));
+					return temp;
+				}
 			}
 		}
 		return null;
@@ -35,7 +39,7 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 		}
 		else  {
 			for(int i=0;i<array[hash].size();i++) {
-				if(Math.abs(key.hashCode())==Math.abs(array[hash].getKey(i).hashCode())) {
+				if(key.equals((K)(array[hash].getKey(i)))) {
 					V temp =(V)(array[hash].get(i));
 					array[hash].set(i, value, key);
 					return temp;
@@ -52,11 +56,15 @@ public class HashTableDictionary <K,V> implements  IDictionary<K,V>  {
 			throw new RuntimeException();
 		int hash=Math.abs(key.hashCode())%size;
 		
-		for(int i=0;i<array[hash].size();i++) {
-			if(Math.abs(key.hashCode())==Math.abs(array[hash].getKey(i).hashCode())) {
-				V temp =(V)(array[hash].get(i));
-				array[hash].remove(i);
-				return temp;
+		if(array[hash]==null)
+			return null;
+		else {
+			for(int i=0;i<array[hash].size();i++) {
+				if(key.equals((K)(array[hash].getKey(i)))) {
+					V temp =(V)(array[hash].get(i));
+					array[hash].remove(i);
+					return temp;
+				}
 			}
 		}
 		return null;
